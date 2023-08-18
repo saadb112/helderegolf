@@ -8,9 +8,18 @@ const staticpath = path.join(__dirname, "../client")
 const ordersuccesspath = path.join(__dirname, "../client/successOrder.html")
 const reviewsuccesspath = path.join(__dirname, "../client/successReview.html")
 const contactsuccesspath = path.join(__dirname, "../client/successContact.html")
+
+
+
+const aboutgetpath = path.join(__dirname, "../client/about.html")
+const featuregetpath = path.join(__dirname, "../client/feature.html")
+const homegetpath = path.join(__dirname, "../client/index.html")
+const contactgetpath = path.join(__dirname, "../client/contact.html")
+const ordergetpath = path.join(__dirname, "../client/order.html")
+const reviewsgetpath = path.join(__dirname, "../client/testimonials.html")
+// const getpath = path.join(__dirname, "../client/successContact.html")
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static(staticpath));
 
 // Connect to MongoDB Atlas
 mongoose.connect('mongodb+srv://saadb112:saadbhaizindabaad1@cluster0.vbcrt.mongodb.net/?retryWrites=true&w=majority', {
@@ -24,6 +33,50 @@ mongoose.connect('mongodb+srv://saadb112:saadbhaizindabaad1@cluster0.vbcrt.mongo
     console.error('Error connecting to MongoDB:', error);
   });
 
+
+
+
+  const visitorSchema = new mongoose.Schema({
+    route: String,
+    views: Number, // Add a views field
+    date: {
+      type: Date,
+      default: Date.now,
+    },
+  });
+  const Visitor = mongoose.model('Visitor', visitorSchema);
+
+
+  app.use(async (req, res, next) => {
+    console.log("route")
+    const route = req.path;
+    // Only record visits for the specified routes
+    if (['/', '/order', '/contact', '/features', '/about', '/return', '/reviews'].includes(route)) {
+      // "/" is the homepage route
+
+      try {
+        const existingVisitor = await Visitor.findOne({ route });
+        
+        if (existingVisitor) {
+          existingVisitor.views += 1;
+          existingVisitor.date = new Date();
+          await existingVisitor.save();
+          
+        } else {
+          const newVisitor = new Visitor({
+            route,
+            views: 1,
+            date: new Date(),
+          });
+          await newVisitor.save();
+        }
+      } catch (error) {
+        console.error('Error saving visitor data:', error);
+      }
+    }
+  
+    next();
+  });
 // Create schema and model
 const entrySchema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -51,6 +104,7 @@ const contactSchema = new mongoose.Schema({
   
 const Contact = mongoose.model('Contact', contactSchema);
   
+app.use(express.static(staticpath));
 
 const reviewSchema = new mongoose.Schema({
   name: String,
@@ -187,6 +241,48 @@ app.delete('/deletecontact/:id', (req, res) => {
         res.status(500).json({ error: error.message });
       });
   });
+
+
+  app.get("/",(req,res)=>{
+   res.sendFile(homegetpath)
+  }) 
+ app.get("/about",(req,res)=>{
+  res.sendFile(aboutgetpath)
+ }) 
+ app.get("/features",(req,res)=>{
+  res.sendFile(featuregetpath)
+ }) 
+ app.get("/return",(req,res)=>{
+  res.sendFile(contactgetpath)
+ }) 
+ app.get("/contact",(req,res)=>{
+  res.sendFile(contactgetpath)
+ }) 
+ app.get("/order",(req,res)=>{
+  res.sendFile(ordergetpath)
+ }) 
+ app.get("/reviews",(req,res)=>{
+  res.sendFile(reviewsgetpath)
+ }) 
+ app.get('/visitor-stats/:route/:interval', async (req, res) => {
+  const { route, interval } = req.params;
+  let newroute = `/${route}`
+  if(route == "home"){
+    newroute = "/"
+  }
+console.log(newroute)
+
+  const dateQuery = {}; // Set your date query based on the interval (daily, weekly, etc.)
+
+  try {
+    const visitors = await Visitor.find({route : newroute}).sort({ timestamp: 'asc' });
+    res.json(visitors);
+    console.log(visitors)
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
