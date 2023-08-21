@@ -42,7 +42,7 @@
 
     // Countdown Timer
     function countDownTimer() {	
-        var endTime = new Date("18 August 2023 10:00:00 GMT+00:00");
+        var endTime = new Date("21 August 2023 10:00:00 GMT+00:00");
         endTime = (Date.parse(endTime) / 1000);
 
         var now = new Date();
@@ -72,6 +72,10 @@
         $("#cdt-hours").html(hours + "<span>-Hours-</span>");
         $("#cdt-minutes").html(minutes + "<span>-Mins-</span>");
         $("#cdt-seconds").html(seconds + "<span>-Secs-</span>");
+        $(".endingTime").html(
+            days + " Days" + " / " + hours +" Hrs" + " / " + minutes +" Mins" + " / " + seconds  + " Secs " 
+            
+            );
 
     }
 

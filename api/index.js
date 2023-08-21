@@ -17,6 +17,7 @@ const homegetpath = path.join(__dirname, "../client/index.html")
 const contactgetpath = path.join(__dirname, "../client/contact.html")
 const ordergetpath = path.join(__dirname, "../client/order.html")
 const reviewsgetpath = path.join(__dirname, "../client/testimonials.html")
+const checkoutgetpath = path.join(__dirname, "../client/checkout.html")
 // const getpath = path.join(__dirname, "../client/successContact.html")
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
@@ -117,7 +118,7 @@ const Review = mongoose.model('Review', reviewSchema);
 // Create a POST request to store data
 app.post('/order', (req, res) => {
   const { name, phone, email, state, city, postcode, streetaddress, message, quantity } = req.body;
-
+console.log(req.body)
   const entry = new Entry({
     name,
     phone,
@@ -135,7 +136,7 @@ app.post('/order', (req, res) => {
       res.sendFile(ordersuccesspath)
     })
     .catch((error) => {
-      res.status(500).send('Error storing data.');
+      res.status(500).send(error);
     });
 });
 app.post('/contact', (req, res) => {
@@ -263,6 +264,9 @@ app.delete('/deletecontact/:id', (req, res) => {
  }) 
  app.get("/reviews",(req,res)=>{
   res.sendFile(reviewsgetpath)
+ }) 
+ app.get("/checkout",(req,res)=>{
+  res.sendFile(checkoutgetpath)
  }) 
  app.get('/visitor-stats/:route/:interval', async (req, res) => {
   const { route, interval } = req.params;

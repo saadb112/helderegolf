@@ -60,7 +60,28 @@ img.animated.pulse {
     width: 38px;
     height: 38px;
 }
-
+.quantity div{
+    border: 1px solid black;
+    height: 30px;
+}
+.quantity div button{
+    border: 0;
+    width: 30px;
+    background-color: transparent;
+    font-size: 18px;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+.quantity div .qValue{
+    font-size: 18px;
+    color: black;
+    padding: 0 20px;
+    margin-bottom: 0;
+}
 .btn-sm-square {
     width: 32px;
     height: 32px;
@@ -372,7 +393,88 @@ img.animated.pulse {
     z-index: 1;
 }
 
-
+.slider-container {
+    position: relative;
+    width: 500px;
+    margin: auto;
+  }
+  
+  .slider {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+  }
+  
+  .slider img {
+    min-width: 500px;
+    height: 600px;
+    transition: transform 0.3s ease-in-out;
+    border-radius: 1rem;
+  }
+  
+  .thumbnails {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .thumbnails img {
+    width: 80px;
+    border-radius: .5rem;
+    height: 80px;
+    margin: 0 .5rem;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  .thumbnails img:hover {
+      opacity: 1;
+    }
+    .thumbnails img:nth-child(1){
+        opacity: 1;
+    }
+    .order-summary {
+        width: 100%;
+        background-color: white;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        margin: 0 auto;
+        padding: 20px;
+      }
+      
+      .product-info {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+      
+      .product-img {
+        width: 50px;
+        height: 50px;
+        margin-right: 10px;
+        background-color: grey;
+      }
+      
+      .product-details {
+        flex: 1;
+      }
+      
+      .product-name {
+        font-weight: bold;
+      }
+      
+      .subtotal {
+        margin-top: 20px;
+      }
+      
+      .total {
+        margin-top: 10px;
+        font-size: 18px;
+        text-align: right;
+      }
 /*** Newsletter ***/
 .newsletter {
     position: relative;
@@ -452,4 +554,21 @@ img.animated.pulse {
     margin-right: 0;
     padding-right: 0;
     border-right: none;
+}
+@media screen and (max-width : 595px) {
+    .slider-container{
+        width: 100%;
+    }
+    .slider {
+        width: 100%;
+    }
+    .slider img{
+        width: 100%;
+        min-width: 100%;
+        height: auto;
+    }
+    .thumbnails img{
+        width: 60px;
+        height: 60px;
+    }
 }
