@@ -52,7 +52,7 @@ mongoose.connect('mongodb+srv://saadb112:saadbhaizindabaad1@cluster0.vbcrt.mongo
     console.log("route")
     const route = req.path;
     // Only record visits for the specified routes
-    if (['/', '/order', '/contact', '/features', '/about', '/return', '/reviews'].includes(route)) {
+    if (['/', '/order', '/contact', '/features', '/about', '/return', '/reviews', '/checkout'].includes(route)) {
       // "/" is the homepage route
 
       try {
