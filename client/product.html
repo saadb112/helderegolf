@@ -31,40 +31,75 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <style>
+        .slider{
+            overflow: hidden !important;
+            width: 100%;
+        }
+        @media screen and (max-width : 450px) {
+
+   .Sliders{
+       width: 100%;
+   }
+}
+    </style>
 </head>
 
 <body>
     <!-- Spinner Start -->
     <div id="spinner"
         class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-        <div class="spinner-grow text-primary" style="width: 48px; height: 48px;" role="status">
+        <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
             <span class="sr-only">Loading...</span>
         </div>
     </div>
     <!-- Spinner End -->
 
+    <div class="cartSlide">
 
+        <div class="cartwrapper bg-white">
+            <div class="d-flex justify-content-between align-items-center mb-5 mt-3">
+                <h1>Cart</h1>
+                <img src="./img/close.png" class="close" alt="" onclick="Cart(false)" style="width: 25px;">
+            </div>
+                <div class="items Cartitems" style="max-height: 278px; overflow: scroll;">
+                </div>
+                <div class="total d-flex justify-content-between">
+                    <p>Total</p>
+                    <h2 ><span class="totalCartPrice"></span> PKR</p>
+                </div>
+                <a href="./checkout.html" class="submit btn btn-primary" style="border-radius: 0;">
+                    Proceed to Checkout
+                </a>
+            </div>
+            </div>
     <!-- Navbar Start -->
-    <div class="container-fluid sticky-top">
+    <div class=" bg-dark text-light text-center d-flex align-items-center justify-content-center" style="height: 40px;">
+        Enjoy Free Shipping All Over Pakistan!
+    </div>
+    <div class="container-fluid sticky-top" style="    background-color: white !important;">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light p-0">
                 <a href="index.html" class="navbar-brand">
-                    <h2 class="text-white"><img src="./img/HG.png" style="width: 12.5rem;" alt=""></h2>
+                    <h2 class="text-white"><img src="./img/HG.png" style="width: 200px;" alt=""></h2>
                 </a>
                 <button type="button" class="navbar-toggler ms-auto me-0" data-bs-toggle="collapse"
                     data-bs-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <div class="navbar-nav ms-auto">
-                        <a href="/" class="nav-item nav-link active">Home</a>
-                        <a href="/about" class="nav-item nav-link ">About</a>
-                        <a href="/features" class="nav-item nav-link">Features</a>
-
-                        <a href="/return" class="nav-item nav-link">Return Product</a>
+                    <div class="navbar-nav mx-auto">
+                        <a href="/unstiched-collection" class="nav-item nav-link">Unstiched Collection </a>
+                        <a href="/stiched-collection" class="nav-item nav-link">Stiched Collection </a>
+                       
+                        <a href="/return" class="nav-item nav-link">Return </a>
                         <a href="/contact" class="nav-item nav-link">Contact</a>
                     </div>
-                    <a href="/order" class="btn btn-dark py-2 px-4 d-none d-lg-inline-block">Shop Now</a>
+                    
+                </div>
+                <div class="cartButton" onclick="Cart(true)">
+                    <img style="width: 30px;" src="./img/cart.svg" alt="">
+                    <span class="CartItemsQuantity">1</span>
                 </div>
             </nav>
         </div>
@@ -82,62 +117,46 @@
                 <div class="col-lg-6 wow fadeIn " data-wow-delay="0.1s">
                     <div class="slider-container">
                         <div class="slider">
-                            
-                          <img class="img" src="./img/slide1.png" alt="Image 2">
-                          <img class="img" src="./img/slide2.png" alt="Image 2">
-                          <img class="img" src="./img/slide3.png" alt="Image 3">
-                          <img class="img" src="./img/slide4.png" alt="Image 3">
-                          <img class="img" src="./img/slide5.png" alt="Image 3">
-                          <!-- Add more images as needed -->
                         </div>
                         <div class="thumbnails"></div>
                       </div>
                 </div>
                 <div class="col-lg-6 wow fadeIn " data-wow-delay="0.5s">
-                    <div class="d-flex ProductPageratings">
 
-                        <div>
-                            <i class="fa-solid fa-star " style="color: #ffff82;" ></i>
-                            <i class="fa-solid fa-star " style="color: #ffff82;" > </i>
-                            <i class="fa-solid fa-star " style="color: #ffff82;" > </i>
-                            <i class="fa-solid fa-star " style="color: #ffff82;" > </i>
-                            <!-- <i class="fa-solid fa-star " style="color: #ffff82;" > </i> -->
-                        </div>
-                        <p class="ms-3">
-                            4.5
-                        </p>
-                    </div>
-                    <h1 class="text-primary mb-4">HeldereGolf's leaf Shaped Soap Holder</h1>
-                    <h5 class="mb-2">Enhance Your Bathing Experience<span class="fw-light text-dark"> With Practical Elegance </span></h1>
+                    <h1 class="text-primary mb-4 ProductTitle"></h1>
+                    
                         <div class="d-flex align-items-center">
-                            <h5 class="text-primary mb-3"><span style="font-size: 0.875rem;">PKR</span>349 </h5>
-                            <p class="mb-3 ms-2" style="font-weight: bold; font-size: 0.875rem; text-decoration: line-through;">PKR449</p>
+                            <h5 class="text-primary mb-3"> <span style="font-size: 0.875rem;" >PKR</span> <span class="ProductPrice"></span> </h5>
+                            <p class="mb-3 ms-2" style="font-weight: bold; font-size: 0.875rem; text-decoration: line-through;">PKR <span class="DiscountPrice">449</span></p>
                         </div>
                         
-                        <p class="mb-0" style="font-weight: bold; font-size: 0.875rem; ">Discount Upto 22% OFF!! 
-                        <p style="color: #749BC2 ; font-weight: bold; font-size: 0.8125rem;  "> Ends in  <span class="endingTime"></span></p>
-                    <p class="mb-4">Elevate your bathroom organization with our revolutionary soap holder. Designed for both style and functionality, this soap holder is the perfect addition to your daily routine. Say goodbye to messy soap bars and hello to a clean and clutter-free countertop.</p>
+                        <p class="mb-0" style="font-weight: bold; font-size: 0.875rem; ">Discount Upto 45% OFF!! 
+                        <p class="" style="color: #252525 !important; font-weight: bold; font-size: 0.8125rem;  "> Ends in  <span class="endingTime"></span></p>
                     <div class="quantity d-flex my-3">
                         <p style="font-size: 0.875rem;" class="my-auto me-2 title">Delivery :</p>
-                        <p style="font-size: 0.875rem;" class="my-auto title">Usually Delivers Within business 3 - 5 Days</p>
+                        <p style="font-size: 0.875rem;" class="my-auto title">Usually Delivers Within  3 - 5 Business Days</p>
                        
                     </div>
                     <div class="quantity d-flex my-3">
                         <p style="font-size: 0.875rem;" class="my-auto me-2 title">Shipping cost :</p>
-                        <p style="font-size: 0.875rem;" class="my-auto title">Standard shipping cost 90 PKR</p>
+                        <p style="font-size: 0.875rem;" class="my-auto title">FREE!!</p>
                     </div>
                     <div class="quantity d-flex my-3">
-                        <p style="font-size: 0.875rem;" class="my-auto me-2 title">7 days return available for any wrong or broken item. To <br> return item, simply visit <a style="text-decoration: underline;" href="/return">Return Product</a></p>
+                        <p style="font-size: 0.875rem;" class="my-auto me-2 title">7 days return available for any wrong item. To <br> return item, simply visit <a style="text-decoration: underline;" href="/return">Return Product</a></p>
+                    </div>
+                    <div class="ProductSize">
+                        <input type="text" value="medium" hidden id="size">
                     </div>
                     <div class="quantity d-flex my-3">
                         <p style="font-size: 1rem;" class="my-auto me-2 title">Quantity :</p>
                         <div class=" d-flex align-items-center" style="border: 0.0625rem solid black;">
-                            <button style="font-weight: 600; font-size: 1.125rem; border-right: 0.0625rem solid black;" onclick="Qantity('add')">+</button>
+                            <button  style="font-weight: 600;font-size: 1.125rem; border-right: 0.0625rem solid black;" onclick="Qantity('subt')">-</button>
                             <p class="qValue " style=" font-size: 1.125rem;" >1</p>
-                            <button  style="font-weight: 600;font-size: 1.125rem; border-left: 0.0625rem solid black;" onclick="Qantity('subt')">-</button>
+                            <button style="font-weight: 600; font-size: 1.125rem; border-left: 0.0625rem solid black;" onclick="Qantity('add')">+</button>
                         </div>
                     </div>
-                    <a class="checkoutbtn btn btn-primary py-2 px-4" href="/order:quantity=1">Checkout</a>
+                    <a class="AddtoCartbtn btn btn-outline-primary me-2 py-2 px-3" style="border-radius: 0 !important;" >Add To Cart</a>
+                    <a class="checkoutbtn btn btn-primary py-2 px-4" style="border-radius: 0 !important;" onclick="Checkout()">Order Now</a>
                 </div>
             </div>
         </div>
@@ -147,221 +166,45 @@
 
 
 
-    <!-- Feature Start -->
-    <div class="container py-5" id="features">
-        <div class="row container">
-            <div class="col-lg-3 align-items-center d-flex">
-                <!-- <img src="./img/slide1.png" style="width: 100%;" alt=""> -->
-                <video style="width: 100%;" controls src="https://video.aliexpress-media.com/play/u/ae_sg_item/2215656658976/p/1/e/6/t/10301/1100149333182.mp4?from=chrome"></video>
-            </div>
-            <div class="col-lg-3 align-items-center d-flex">
-                <img src="./img/slide6.jpg" style="width: 100%;" alt="">
-            </div>
-            <div class="col-lg-3 align-items-center d-flex">
-                <img src="./img/slide7.jpg" style="width: 100%;" alt="">
-            </div>
-            <div class="col-lg-3 align-items-center d-flex">
-                <img src="./img/slide8.jpg" style="width: 100%;" alt="">
-            </div>
-        </div>
+    <!-- Hero Start -->
+    <div class="container NewestArrival Sliders position-relative" >
+        <h2 class="text-center my-5"><svg xmlns="http://www.w3.org/2000/svg" width="50" height="2" viewBox="0 0 81 4" fill="none">
+            <rect width="100" height="2" fill="black"/>
+            </svg> Related Products <svg xmlns="http://www.w3.org/2000/svg" width="50" height="2" viewBox="0 0 81 4" fill="none">
+                <rect width="100" height="2" fill="black"/>
+            </svg></h2>
+        
+        <div class="RelatedProducts ProductSlider justify-content-center top-selling  g-4">
+    
         
     </div>
-    <!-- Feature End -->
-    <!-- Feature Start -->
-    <div class="container-fluid py-5" id="features">
-        <div class="container">
-            <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 37.5rem;">
-                <h1 class="text-primary mb-3"><span class="fw-light text-dark">Best Benefits Of Our</span> Leaf Shaped Soap Holder</h1>
-                <p class="mb-5">Experience the convenience of prolonged soap freshness, elegant design, and hassle-free maintenance with our versatile and affordable leaf-shaped soap holder</p>
-            </div>
-            <div class="row g-4 align-items-center">
-                <div class="col-lg-4 wow fadeIn" data-wow-delay="0.3s">
-                    <div class="row g-5">
-                        <div class="col-12 d-flex">
-                            <div class="btn-square rounded-circle border flex-shrink-0"
-                                style="width: 5rem; height: 5rem;">
-                                <i class="fa fa-check fa-2x text-primary"></i>
-                            </div>
-                            <div class="ps-3">
-                                <h5>Prolonged Soap Freshness</h5>
-                                <hr class="w-25 bg-primary my-2">
-                                <span>Extend soap life with efficient drainage.</span>
-                            </div>
-                        </div>
-                        <div class="col-12 d-flex">
-                            <div class="btn-square rounded-circle border flex-shrink-0"
-                                style="width: 5rem; height: 5rem;">
-                                <i class="fa fa-check fa-2x text-primary"></i>
-                            </div>
-                            <div class="ps-3">
-                                <h5>Nature-Inspired Design</h5>
-                                <hr class="w-25 bg-primary my-2">
-                                <span>Elevate bathroom style with leaf design.</span>
-                            </div>
-                        </div>
-                        <div class="col-12 d-flex">
-                            <div class="btn-square rounded-circle border flex-shrink-0"
-                                style="width: 5rem; height: 5rem;">
-                                <i class="fa fa-check fa-2x text-primary"></i>
-                            </div>
-                            <div class="ps-3">
-                                <h5>Effortless Maintenance</h5>
-                                <hr class="w-25 bg-primary my-2">
-                                <span>Hassle-free cleaning and maintenance.</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 wow fadeIn" data-wow-delay="0.1s">
-                    <img class="img-fluid animated pulse infinite" src="img/soapholder.png">
-                </div>
-                <div class="col-lg-4 wow fadeIn" data-wow-delay="0.5s">
-                    <div class="row g-5">
-                        <div class="col-12 d-flex">
-                            <div class="btn-square rounded-circle border flex-shrink-0"
-                                style="width: 5rem; height: 5rem;">
-                                <i class="fa fa-check fa-2x text-primary"></i>
-                            </div>
-                            <div class="ps-3">
-                                <h5>Flexibility in Placement</h5>
-                                <hr class="w-25 bg-primary my-2">
-                                <span>Versatile placement options for convenience.</span>
-                            </div>
-                        </div>
-                        <div class="col-12 d-flex">
-                            <div class="btn-square rounded-circle border flex-shrink-0"
-                                style="width: 5rem; height: 5rem;">
-                                <i class="fa fa-check fa-2x text-primary"></i>
-                            </div>
-                            <div class="ps-3">
-                                <h5>Affordability Meets Elegance</h5>
-                                <hr class="w-25 bg-primary my-2">
-                                <span>Budget-friendly elegance for any space.</span>
-                            </div>
-                        </div>
-                        <div class="col-12 d-flex">
-                            <div class="btn-square rounded-circle border flex-shrink-0"
-                                style="width: 5rem; height: 5rem;">
-                                <i class="fa fa-check fa-2x text-primary"></i>
-                            </div>
-                            <div class="ps-3">
-                                <h5>Thoughtful Gifting Solution</h5>
-                                <hr class="w-25 bg-primary my-2">
-                                <span>Thoughtful gift choice for practical luxury.</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
-    <!-- Feature End -->
-
-
-
-
-<!-- Review Form Start -->
-<div class="container-fluid deal my-5 py-5" style="background: transparent;">
-    <div class="container py-5">
-        <div class="row g-5 align-items-center">
-            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
-                <div class="row g-5">
-                    <div class="col-lg-12 wow fadeIn" data-wow-delay="0.1s">
-                        <h1 class="text-primary mb-3"><span class="fw-light text-dark">Please Submit a </span> Review</h1>
-                        <div class="wow fadeIn" data-wow-delay="0.3s">
-                            <form method="post" action="/review">
-                                <div class="row g-3">
-                                    <div class="col-12 input ratingsstar">
-                                        <input type="checkbox" value="1" class="fa-regular fa-star ratinginput" onclick="ratingInputfunc(1)">
-                                        <input type="checkbox" value="2" class="fa-regular fa-star ratinginput" onclick="ratingInputfunc(2)">
-                                        <input type="checkbox" value="3" class="fa-regular fa-star ratinginput" onclick="ratingInputfunc(3)">
-                                        <input type="checkbox" value="4" class="fa-regular fa-star ratinginput" onclick="ratingInputfunc(4)">
-                                        <input type="checkbox" value="5" class="fa-regular fa-star ratinginput" onclick="ratingInputfunc(5)">
-                        <input type="number" hidden class="hiddenratinginput" name="rating">
-    
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-floating">
-                                            <input type="text" required name="name" class="form-control" id="name" placeholder="Your Name">
-                                            <label for="name">Your Name</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-floating">
-                                            <textarea class="form-control" name="review" placeholder="Leave a message here" id="message" style="height: 9.375rem"></textarea>
-                                            <label for="message">Message</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <button class="btn btn-primary w-100 py-3" type="submit">Submit Review</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                   
-                </div>
-            </div>
-            
-        </div>
-    </div>
-</div>
-<!-- Review Form End -->
-
-<div class="container mb-5">
-    <h1 class="ms-3">Manufacturer's Feedback</h1>
-<div class="d-flex flex-wrap justify-content-start align-items-start reviewcontainer">
-
-
-</div>
-</div>
+    <!-- Hero End -->
 
 
     <!-- Footer Start -->
     <div class="container-fluid bg-white footer">
         <div class="container py-5">
             <div class="row g-5">
-                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.1s">
-                    <a href="index.html" class="navbar-brand">
-                        <h2 class="text-white"><img src="./img/HG.png" style="width: 12.5rem;" alt=""></h2>
-                    </a>
-                    <p class="mb-0">HeldereGolf is your ultimate destination for premium soap holder solutions. We take pride in offering a curated selection of high-quality, leaf-shaped soap holders that combine functionality with elegance. Our mission is to enhance your daily routines with our thoughtfully designed products, adding a touch of sophistication to your spaces</p>
-                </div>
-                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.3s">
-                    <h5 class="mb-4">Get In Touch</h5>
-                    <p><i class="fa-brands fa-instagram me-3"></i>instagram.com/helderegolf</p>
-                    <p><i class="fa fa-phone-alt me-3"></i>+92 3192482696</p>
-                    <p><i class="fa fa-envelope me-3"></i>contact@helderegolf.shop</p>
-                    
-                </div>
-               
-                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.7s">
-                    <h5 class="mb-4">Popular Link</h5>
-                    <a class="btn btn-link" href="index.html">Home</a>
-                    <a class="btn btn-link" href="about.html">About Us</a>
-                    <a class="btn btn-link" href="contact.html">Contact Us</a>
-                    <a class="btn btn-link" href="">Privacy Policy</a>
-                    <a class="btn btn-link" href="">Terms & Condition</a>
-                </div>
+                
+            
             </div>
         </div>
         <div class="container wow fadeIn" data-wow-delay="0.1s">
             <div class="copyright">
-                <div class="row">
+                <div class="row d-flex align-items-center">
+                    <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.1s">
+                        <a href="index.html" class="navbar-brand">
+                        <img src="./img/HG.png" style="width: 200px;" alt="">
+                        </a>
+                    </div>
                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                        &copy; <a class="border-bottom" href="#">HeldereGolf</a>, All Right Reserved.
+                        &copy; 2023 <a class="border-bottom" href="#">HeldereGolf</a>, All Right Reserved. powered by Codex
 
                         <!-- /*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/
                         Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a> -->
                     </div>
-                    <div class="col-md-6 text-center text-md-end">
-                        <div class="footer-menu">
-                            <a href="">Home</a>
-                            <a href="">Cookies</a>
-                            <a href="">Help</a>
-                            <a href="">FAQs</a>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -392,6 +235,7 @@ document.querySelectorAll(".slider img").forEach((img, index) => {
   const thumbnail = document.createElement("img");
   thumbnail.src = img.src;
   thumbnail.alt = img.alt;
+  
   thumbnail.addEventListener("click", () => showImage(index));
   thumbnailsContainer.appendChild(thumbnail);
 });
@@ -408,23 +252,24 @@ function showImage(index) {
  });
  thumbnail[index].style.opacity = "1"
  allimgs[index].style.display = "flex"
+//  document.querySelector(".slider").style.background = `url("${allimgs[index].src}")`
 }
 
 
 const Qantity = (value)=>{
 const pValue = document.querySelector(".qValue")
-const checkoutbtn = document.querySelector(".checkoutbtn")
 if(value == "add"){
     pValue.innerHTML = parseInt(pValue.innerHTML) + 1
     localStorage.setItem("quantity", pValue.innerHTML)
-    checkoutbtn.href=`/order?quantity=${pValue.innerHTML}`
 }else{
     if(pValue.innerHTML == 1) return
     localStorage.setItem("quantity", pValue.innerHTML)
     pValue.innerHTML = parseInt(pValue.innerHTML) - 1
-    checkoutbtn.href=`/order:quantity=${pValue.innerHTML}`
 }
 }
+
+
+
 
 
 
@@ -510,7 +355,7 @@ fetch('/allreviews')
     </div>
         <h5 class="mt-3 fw-light lh-base ">${element.review}</h5>
 </div>`
-document.querySelector(".reviewcontainer").appendChild(template.content.firstElementChild)
+// document.querySelector(".reviewcontainer").appendChild(template.content.firstElementChild)
         });
       })
       .catch(error => {
@@ -518,6 +363,296 @@ document.querySelector(".reviewcontainer").appendChild(template.content.firstEle
       });
 </script>
     
+ <!-- CART FUNCTIONS  -->
+ <script>
+    const Cart = (value) => {
+       if (value) {
+
+           document.querySelector(".cartwrapper").classList.add("cartSlideActive")
+       } else {
+
+           document.querySelector(".cartwrapper").classList.remove("cartSlideActive")
+       }
+   }
+
+
+
+let totalCartPricenum = 0.0
+const CartItems = JSON.parse(localStorage.getItem('cart')) || [];
+for (let index = 0; index < CartItems.length; index++) {
+const element = CartItems[index];
+const totalItemPrice = element.price * element.quantity
+totalCartPricenum += totalItemPrice
+
+}
+const totalCartPrice = document.querySelector(".totalCartPrice")
+totalCartPrice.innerHTML = totalCartPricenum
+const updateTotalCartPrice = (price) => {
+totalCartPricenum += price
+totalCartPrice.innerHTML = totalCartPricenum
+}
+
+
+let GetCartItem = JSON.parse(localStorage.getItem('cart')) || [];
+document.querySelector(".CartItemsQuantity").innerHTML = GetCartItem.length
+
+document.querySelector(".CartItemsQuantity").innerHTML = GetCartItem.length
+
+function getCartItems() {
+if(GetCartItem.length == 0){
+   items.innerHTML = "There Are No Items In Cart"
+}else{
+   items.innerHTML = ""
+}
+const CartItems = JSON.parse(localStorage.getItem('cart')) || [];
+for (let index = 0; index < CartItems.length; index++) {
+
+   const element = CartItems[index];
+   const template = document.createElement("template")
+   template.innerHTML = `
+   <div class="item d-flex pb-3 mb-4" style="border-bottom: 1px solid #80808059">
+                   <img class="productimg" style="width: 50px;
+                   object-fit: contain; max-height: 150px; margin-right: 25px;" src="${element.img}" alt="">
+                   <div class="">
+                       <h2>${element.name}</h2>
+                       <p class="mb-0 btn btn-secondary text-white p-1 py-0">${element.size}</p>
+                       <p class="mb-0">${element.price} PKR</p>
+                       <div class="quantity d-flex align-items-center">
+                           <button onclick="QuantityCart('subt','cartQuantityValue${index}',${element.price},${element.id})">-</button>
+                           <p class="mb-0 cartQuantityValue${index}">${element.quantity}</p>
+                           <button onclick="QuantityCart('add','cartQuantityValue${index}',${element.price},${element.id})">+</button>
+                       </div>
+                   </div> 
+                   <img src="./img/trash-solid.svg" style="width: 25px; cursor: pointer; margin-left: auto;" alt="" onclick="deleteFromCart(${index})">
+               </div>
+`
+   
+   items.append(template.content.firstElementChild)
+}
+
+}
+
+function addToCart(item) {
+       
+updateTotalCartPrice(item.price)
+// Get the current cart items from local storage (if any)
+let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+
+// Add the new item to the cart
+cartItems.push(item);
+
+// Update the cart in local storage with the new item
+localStorage.setItem('cart', JSON.stringify(cartItems));
+// getCartItems()
+GetCartItem = JSON.parse(localStorage.getItem('cart')) || [];
+       document.querySelector(".CartItemsQuantity").innerHTML = GetCartItem.length
+       getCartItems()
+}
+
+
+const items = document.querySelector(".Cartitems")
+
+
+getCartItems()
+
+
+const QuantityCart = (value, para, price, itemId) => {
+let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+const itemIndex = cartItems.findIndex(item => item.id === itemId);
+
+const p = document.querySelector(`.${para}`)
+if (value == "add") {
+   p.innerHTML = parseInt(p.innerHTML) + 1
+   totalCartPricenum +=price
+totalCartPrice.innerHTML = totalCartPricenum
+
+   // If the item is found in the cart
+   if (itemIndex !== -1) {
+       // Increase the quantity of the item
+       cartItems[itemIndex].quantity += 1;
+
+       // Update the cart in local storage with the updated item quantity
+       localStorage.setItem('cart', JSON.stringify(cartItems));
+
+      
+   } else {
+       console.error('Item not found in cart.');
+   }
+
+} else if (value == "subt") {
+   if (parseInt(p.innerHTML) > 1) {
+       p.innerHTML = parseInt(p.innerHTML) - 1
+       totalCartPricenum -=price
+totalCartPrice.innerHTML = totalCartPricenum
+       if (itemIndex !== -1) {
+           // Increase the quantity of the item
+           cartItems[itemIndex].quantity -= 1;
+
+           // Update the cart in local storage with the updated item quantity
+           localStorage.setItem('cart', JSON.stringify(cartItems));
+
+         
+       } else {
+           console.error('Item not found in cart.');
+       }
+   } else {
+
+   }
+}
+
+
+
+}
+
+function deleteFromCart(itemIndex) {
+
+let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+
+if (itemIndex >= 0 && itemIndex < cartItems.length) {
+   totalCartPricenum -= cartItems[itemIndex].quantity * cartItems[itemIndex].price
+totalCartPrice.innerHTML = totalCartPricenum
+
+   // Remove the item from the cart array
+   cartItems.splice(itemIndex, 1);
+
+   // Update the cart in local storage without the deleted item
+   localStorage.setItem('cart', JSON.stringify(cartItems));
+
+   
+   GetCartItem = JSON.parse(localStorage.getItem('cart')) || [];
+       document.querySelector(".CartItemsQuantity").innerHTML = GetCartItem.length
+   getCartItems()
+} else {
+   console.error('Invalid item index provided.');
+}
+
+}
+</script>
+
+<script>
+    const url = window.location.href;
+    const param = url.split("-")
+    let ProductId = param[1];
+    fetch("/products")
+
+    .then((response) => {
+      // Check if the response status code is in the range 200-299 (indicating success)
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      // Parse the response body as JSON
+      return response.json();
+    })
+    .then((data) => {
+        const topSelling =document.querySelector(".top-selling")
+        // console.log(param)
+        for (let index = 0; index < data.length; index++) {
+        const element = data[index];
+        
+        
+        
+        if(element.productId == parseInt(param[1])){
+            document.querySelector(".ProductTitle").innerHTML = element.title
+            document.querySelector(".ProductPrice").innerHTML = element.price
+            document.querySelector(".DiscountPrice").innerHTML = Math.floor( element.price * 100 / 58)
+            document.querySelector(".AddtoCartbtn").addEventListener("click", ()=>{
+                addToCart({id : element.productId, name : `${element.title}`, price : element.price, quantity : 1, img : `/Images/${element.img[0].filename}`, size : `${document.querySelector("#size").value}`})
+            })
+            // document.querySelector(".ProductDesc").innerHTML = element.desc
+
+            const size = document.querySelector(".ProductSize")
+          if(!element.size){
+                const template = document.createElement("template")
+                    template.innerHTML = `
+                    <button class="active">Unstiched</button>
+                            `
+                    size.appendChild(template.content.firstElementChild)
+            }else  if(!element.size.includes(",")){
+                // console.log(element.size)
+                const template = document.createElement("template")
+                    template.innerHTML = `
+                    <button class="active">${element.size}</button>
+                            `
+                    size.appendChild(template.content.firstElementChild)
+
+            }else if(element.size.includes(",")){
+
+const ProductSize = element.size.split(",")
+console.log(element.size)
+for (let index = 0; index < ProductSize.length; index++) {
+    const element = ProductSize[index];
+    const template = document.createElement("template")
+    template.innerHTML = `
+    <button onclick="SelectSize(this, '${element}')">${element}</button>
+            `
+    size.appendChild(template.content.firstElementChild)
+}
+}
+            for (let index = 0; index < element.img.length; index++) {
+                const elment2 = element.img[index];
+                const slider = document.createElement("template")
+                slider.innerHTML = `<img class="img" src="/Images/${elment2.filename}" alt="Image 2">`
+                const thumbnail = document.createElement("template")
+                thumbnail.innerHTML = `<img class="img" src="/Images/${elment2.filename}" onclick="showImage(${index})" alt="Image 2">`
+                document.querySelector(".slider").appendChild(slider.content.firstElementChild)
+                document.querySelector(".thumbnails").append(thumbnail.content.firstElementChild)
+                
+            }
+        }
+        
+     }
+      
+
+
+    //  RELATED PRODUCTS 
+const RandomStart = Math.ceil(Math.random() * 23)
+console.log(RandomStart)
+    for (let index = RandomStart; index < RandomStart + 4; index++) {
+        const element = data[index];
+        const template = document.createElement("template")
+    const newTitle = element.title.replace("Women's", "")
+
+        template.innerHTML = `
+        <div class=" wow fadeIn " data-wow-delay="0.1s">
+        <div class="product-item text-center border h-100 p-4">
+            <a href="/product-${element.productId}" class="card-Top flex-column d-flex align-items-center justify-content-center">
+            <img class="img-fluid mb-4 w-auto h-auto" src="/Images/${element.img[0].filename}" alt="">
+            <p href="" class="h6 d-inline-block mb-2" style="font-weight : 500">${element.title}</p>
+
+            </a>
+            <h5 class="text-primary mb-3">${element.price} PKR</h5>
+            <button  class="btn btn-outline-primary px-3" style="border-radius: 0;" onclick="addToCart({id : ${element.productId}, name :'${newTitle}', price : ${element.price}, quantity : 1, img : '/Images/${element.img[0].filename}',size : 'Medium'})">Add To Cart</button>
+        </div>
+    </div>
+        `
+        document.querySelector(".RelatedProducts").appendChild(template.content.firstElementChild)
+    }
+    })
+    .catch((error) => {
+      // Handle any errors that occurred during the fetch
+      console.error('Fetch error:', error);
+      throw error;
+    });
+    
+
+
+    const SelectSize = (e, value)=>{
+        const buttons = document.querySelectorAll(".ProductSize button")
+
+        const input = document.querySelector("#size")
+        input.value = value
+        buttons.forEach(element => {
+            element.classList.remove("active")
+        });
+        e.classList.add("active")
+    }
+    const Checkout = ()=>{
+        const input = document.querySelector("#size")
+        const qValue = document.querySelector(".qValue")
+        window.location.href = `/checkout-${ProductId}-${input.value}-${qValue.innerHTML}`
+    }
+</script>
 </body>
 
 </html>

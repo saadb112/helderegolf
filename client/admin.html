@@ -292,6 +292,7 @@ const tabs = document.querySelectorAll('.tab');
     fetch('/allorder')
       .then(response => response.json())
       .then(data => {
+        console.log(data)
         const cards = document.querySelector('.Orderscards');
         data.forEach(entry => {
           const card = document.createElement('div');
@@ -300,7 +301,6 @@ const tabs = document.querySelectorAll('.tab');
             <strong>Name:</strong> ${entry.name}<br>
             <strong>Phone:</strong> ${entry.phone}<br>
             <strong>Email:</strong> ${entry.email}<br>
-            <strong>Quantity:</strong> ${entry.quantity}<br>
             <strong>State:</strong> ${entry.state}<br>
             <strong>City:</strong> ${entry.city}<br>
             <strong>Postcode:</strong> ${entry.postcode}<br>

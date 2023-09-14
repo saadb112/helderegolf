@@ -16,12 +16,31 @@ const featuregetpath = path.join(__dirname, "../client/feature.html")
 const homegetpath = path.join(__dirname, "../client/index.html")
 const contactgetpath = path.join(__dirname, "../client/contact.html")
 const ordergetpath = path.join(__dirname, "../client/order.html")
+const productgetpath = path.join(__dirname, "../client/product.html")
 const reviewsgetpath = path.join(__dirname, "../client/testimonials.html")
 const checkoutgetpath = path.join(__dirname, "../client/checkout.html")
+const unstichedgetpath = path.join(__dirname, "../client/unstiched.html")
+const stichedgetpath = path.join(__dirname, "../client/stiched.html")
+
+
+const multer = require("multer")
+let Filename = ""
+app.use(express.static("./"))
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, "./Images");
+    },
+    filename: (req, file, cb) => {
+      Filename = Date.now() + path.extname(file.originalname)
+      console.log(Filename);
+      cb(null, Filename);
+    }
+  });
 // const getpath = path.join(__dirname, "../client/successContact.html")
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
-
+const upload = multer({storage})
 // Connect to MongoDB Atlas
 mongoose.connect('mongodb+srv://saadb112:Saadbhaizindabaad11@cluster0.vbcrt.mongodb.net/?retryWrites=true&w=majority', {
   useNewUrlParser: true,
@@ -46,6 +65,17 @@ mongoose.connect('mongodb+srv://saadb112:Saadbhaizindabaad11@cluster0.vbcrt.mong
     },
   });
   const Visitor = mongoose.model('Visitor', visitorSchema);
+
+
+  const ProductsSchema = new mongoose.Schema({
+    productId:Number,
+    title: String,
+    img : Array,
+    price : Number,
+    category : String
+   
+  });
+  const Products = mongoose.model('product', ProductsSchema);
 
 
   app.use(async (req, res, next) => {
@@ -80,16 +110,19 @@ mongoose.connect('mongodb+srv://saadb112:Saadbhaizindabaad11@cluster0.vbcrt.mong
   });
 // Create schema and model
 const entrySchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  phone: { type: String, required: true },
-  email: { type: String, required: true },
+  PId : String,
+  quantity : String,
+  size : String,
+  name: { type: String},
+  phone: { type: String},
+  email: { type: String},
   state: String,
-  city: { type: String, required: true },
+  city: { type: String},
   postcode: String,
-  streetaddress: { type: String, required: true },
+  streetaddress: { type: String},
   date: { type: Date, default: Date.now },
   message: String,
-  quantity: Number,
+  order: Array,
 });
 
 const Entry = mongoose.model('Entry', entrySchema);
@@ -117,9 +150,10 @@ const Review = mongoose.model('Review', reviewSchema);
 
 // Create a POST request to store data
 app.post('/order', (req, res) => {
-  const { name, phone, email, state, city, postcode, streetaddress, message, quantity } = req.body;
-console.log(req.body)
+  const {PId,quantity,size, name, phone, email, state, city, postcode, streetaddress, message, order } = req.body;
+// console.log(req.body)
   const entry = new Entry({
+    PId,quantity,size,
     name,
     phone,
     email,
@@ -128,16 +162,18 @@ console.log(req.body)
     postcode,
     streetaddress,
     message,
-    quantity,
+    order
   });
 
-  entry.save()
-    .then(() => {
-      res.sendFile(ordersuccesspath)
-    })
-    .catch((error) => {
-      res.status(500).send(error);
-    });
+entry.save()
+.then(result => {
+res.send("ok")
+
+})
+.catch(error => {
+  res.status(500).json({ error: error.message });
+});
+
 });
 app.post('/contact', (req, res) => {
     const { name, email, subject, message } = req.body;
@@ -158,7 +194,43 @@ app.post('/contact', (req, res) => {
         res.status(500).json({ error: error.message });
       });
   });
+app.post('/addproduct', upload.array("image", 5), async(req, res) => {
+  const allProduct = await Products.find({})
+  let productId = allProduct.length + 224363234
+    const { title, price, category } = req.body;
+    const filenames = req.files.map((file) => file.filename);
+    const product = new Products({
+      productId,
+      title,
+      img : filenames.map((filename) => ({ filename })),
+      price,
+      category
+    });
+  
+    const Save = await product.save()
+    if(Save) {
+      console.log(Save)
+      res.send("successfull")
+    }
+     
+  });
+app.get("/products", async (req,res)=>{
+  const product = await Products.find({})
+res.send(product)
+})
 
+app.get("/product-:id", (req,res)=>{
+  res.sendFile(productgetpath)
+})
+app.get("/checkout-:id", (req,res)=>{
+  res.sendFile(checkoutgetpath)
+})
+app.get("/unstiched-collection", (req,res)=>{
+  res.sendFile(unstichedgetpath)
+})
+app.get("/stiched-collection", (req,res)=>{
+  res.sendFile(stichedgetpath)
+})
   app.post('/review', (req, res) => {
     const { name, rating, review } = req.body;
     const newReview = new Review({
@@ -177,7 +249,7 @@ app.post('/contact', (req, res) => {
       });
   });
 app.get('/allorder', async (req, res)=> {
-  const data = await  Entry.find({});
+  const data = await Entry.find({});
   res.send(data)
   });
 
@@ -268,6 +340,10 @@ app.delete('/deletecontact/:id', (req, res) => {
  app.get("/checkout",(req,res)=>{
   res.sendFile(checkoutgetpath)
  }) 
+ app.get("/success-order",(req,res)=>{
+ res.sendFile(ordersuccesspath)
+ }) 
+
  app.get('/visitor-stats/:route/:interval', async (req, res) => {
   const { route, interval } = req.params;
   let newroute = `/${route}`
