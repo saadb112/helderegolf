@@ -42,7 +42,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 const upload = multer({storage})
 // Connect to MongoDB Atlas
-mongoose.connect('mongodb+srv://saadb112:Saadbhaizindabaad11@cluster0.vbcrt.mongodb.net/?retryWrites=true&w=majority', {
+mongoose.connect('mongodb+srv://saadb451:saadbhaizindabaad1@cluster0.vbcrt.mongodb.net/?retryWrites=true&w=majority', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
