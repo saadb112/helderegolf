@@ -44,7 +44,7 @@
   var now = new Date();
   now = Date.parse(now) / 1000;
 
-  var endTime = new Date("25 September 2023 4:15:00 GMT+00:00");
+  var endTime = new Date("25 September 2023 07:30:00 GMT+00:00");
   endTime = Date.parse(endTime) / 1000;
 
   var timeLeft = endTime - now;
