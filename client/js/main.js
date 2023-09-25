@@ -40,48 +40,52 @@
     });
 
 
-    // Countdown Timer
-    function countDownTimer() {	
-        var endTime = new Date("25 September 2023 11:59:00 GMT+00:00");
-        endTime = (Date.parse(endTime) / 1000);
+    function countDownTimer() {
+  var now = new Date();
+  now = Date.parse(now) / 1000;
 
-        var now = new Date();
-        now = (Date.parse(now) / 1000);
+  var endTime = new Date("25 September 2023 10:15:00 GMT+00:00");
+  endTime = Date.parse(endTime) / 1000;
 
-        var timeLeft = endTime - now;
+  var timeLeft = endTime - now;
 
-        var days = Math.floor(timeLeft / 86400);
-        var hours = Math.floor((timeLeft - (days * 86400)) / 3600);
-        var minutes = Math.floor((timeLeft - (days * 86400) - (hours * 3600)) / 60);
-        var seconds = Math.floor((timeLeft - (days * 86400) - (hours * 3600) - (minutes * 60)));
+  // If the timer has ended, add 6 hours to the end time
+  if (timeLeft <= 0) {
+    endTime += 6 * 3600; // Add 6 hours (in seconds)
+    timeLeft = endTime - now;
+  }
 
-        if (days < "10") {
-            days = "0" + days;
-        }
-        if (hours < "10") {
-            hours = "0" + hours;
-        }
-        if (minutes < "10") {
-            minutes = "0" + minutes;
-        }
-        if (seconds < "10") {
-            seconds = "0" + seconds;
-        }
+  var days = Math.floor(timeLeft / 86400);
+  var hours = Math.floor((timeLeft - days * 86400) / 3600);
+  var minutes = Math.floor((timeLeft - days * 86400 - hours * 3600) / 60);
+  var seconds = Math.floor(timeLeft - days * 86400 - hours * 3600 - minutes * 60);
 
-        $("#cdt-days").html(days + "<span>-Days-</span>");
-        $("#cdt-hours").html(hours + "<span>-Hours-</span>");
-        $("#cdt-minutes").html(minutes + "<span>-Mins-</span>");
-        $("#cdt-seconds").html(seconds + "<span>-Secs-</span>");
-        $(".endingTime").html(
-            days + " Days" + " / " + hours +" Hrs" + " / " + minutes +" Mins" + " / " + seconds  + " Secs " 
-            
-            );
+  if (days < "10") {
+    days = "0" + days;
+  }
+  if (hours < "10") {
+    hours = "0" + hours;
+  }
+  if (minutes < "10") {
+    minutes = "0" + minutes;
+  }
+  if (seconds < "10") {
+    seconds = "0" + seconds;
+  }
 
-    }
+  $("#cdt-days").html(days + "<span>-Days-</span>");
+  $("#cdt-hours").html(hours + "<span>-Hours-</span>");
+  $("#cdt-minutes").html(minutes + "<span>-Mins-</span>");
+  $("#cdt-seconds").html(seconds + "<span>-Secs-</span>");
+  $(".endingTime").html(
+    days + " Days" + " / " + hours + " Hrs" + " / " + minutes + " Mins" + " / " + seconds + " Secs "
+  );
+}
 
-    setInterval(function () {
-        countDownTimer();
-    }, 1000);
+setInterval(function () {
+  countDownTimer();
+}, 1000);
+
 
 
     // Testimonials carousel
