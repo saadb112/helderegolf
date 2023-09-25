@@ -44,14 +44,14 @@
   var now = new Date();
   now = Date.parse(now) / 1000;
 
-  var endTime = new Date("25 September 2023 10:15:00 GMT+00:00");
+  var endTime = new Date("25 September 2023 18:15:00 GMT+00:00");
   endTime = Date.parse(endTime) / 1000;
 
   var timeLeft = endTime - now;
 
   // If the timer has ended, add 6 hours to the end time
   if (timeLeft <= 0) {
-    endTime += 6 * 3600; // Add 6 hours (in seconds)
+    endTime += 10 * 3600; // Add 6 hours (in seconds)
     timeLeft = endTime - now;
   }
 
